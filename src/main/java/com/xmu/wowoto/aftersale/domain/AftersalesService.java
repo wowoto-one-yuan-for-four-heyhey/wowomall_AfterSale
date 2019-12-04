@@ -1,5 +1,7 @@
 package com.xmu.wowoto.aftersale.domain;
 
+import org.apache.ibatis.type.Alias;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ import java.util.Objects;
  * @Date: Created in 14:50 2019/11/29
  * @Modified By:
  **/
+@Alias("afterSalesService")
 public class AftersalesService {
     private Integer id;
     /**
