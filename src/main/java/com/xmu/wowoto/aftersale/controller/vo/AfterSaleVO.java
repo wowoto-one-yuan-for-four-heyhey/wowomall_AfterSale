@@ -3,13 +3,13 @@ package com.xmu.wowoto.aftersale.controller.vo;
 import javax.xml.crypto.Data;
 
 public class AfterSaleVO {
-    private int goods_type;
+    private Integer goods_type;
 
     private String apply_reason;
 
-    private int number;
+    private Integer number;
 
-    private int order_item_id;
+    private Integer order_item_id;
 
     /***************************************************
      * 生成代码
@@ -25,7 +25,7 @@ public class AfterSaleVO {
                 '}';
     }
 
-    public int getGoods_type() {
+    public Integer getGoods_type() {
         return goods_type;
     }
 
@@ -33,15 +33,15 @@ public class AfterSaleVO {
         return apply_reason;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public int getOrder_item_id() {
+    public Integer getOrder_item_id() {
         return order_item_id;
     }
 
-    public void setGoods_type(int goods_type) {
+    public void setGoods_type(Integer goods_type) {
         this.goods_type = goods_type;
     }
 
@@ -49,11 +49,11 @@ public class AfterSaleVO {
         this.apply_reason = apply_reason;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public void setOrder_item_id(int order_item_id) {
+    public void setOrder_item_id(Integer order_item_id) {
         this.order_item_id = order_item_id;
     }
 }
