@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class AfterSaleDao {
     @Autowired
     AfterSaleMapper afterSaleMapper;
-    public void addAfterSale(AftersalesService ass){
-        afterSaleMapper.addAfterSale(ass);
+    public int addAfterSale(AftersalesService ass){
+        return afterSaleMapper.addAfterSale(ass);
     }
 }
