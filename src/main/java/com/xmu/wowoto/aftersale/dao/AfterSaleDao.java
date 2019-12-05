@@ -10,6 +10,6 @@ public class AfterSaleDao {
     @Autowired
     AfterSaleMapper afterSaleMapper;
     public void addAfterSale(AftersalesService ass){
-
+        afterSaleMapper.addAfterSale(ass);
     }
 }
