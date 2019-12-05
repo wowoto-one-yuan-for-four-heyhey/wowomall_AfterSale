@@ -15,7 +15,7 @@ public class AfterSaleController {
     @Autowired
     AfterSaleService afterSaleService;
 
-    @PostMapping("order/{id}/refund")
+    @PostMapping("order/refund")
     public Object applyForRefund(AfterSaleVO asvo) {
         AftersalesService ass = new AftersalesService();
         ass.setGoodsType(asvo.getGoods_type());
