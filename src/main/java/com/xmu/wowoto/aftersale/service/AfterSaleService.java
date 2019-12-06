@@ -15,7 +15,6 @@ public class AfterSaleService {
     public AftersalesService refund(AftersalesService ass) {
         ass.setType(false);
         ass.setBeApplied(false);
-        ass.setBeDeleted(false);
         afterSaleDao.addAfterSale(ass);
         Integer id= ass.getId();
         AftersalesService ret=afterSaleDao.getAfterSale(id);
@@ -25,7 +24,6 @@ public class AfterSaleService {
     {
         ass.setType(true);
         ass.setBeApplied(false);
-        ass.setBeDeleted(false);
         afterSaleDao.addAfterSale(ass);
         Integer id= ass.getId();
         AftersalesService ret=afterSaleDao.getAfterSale(id);

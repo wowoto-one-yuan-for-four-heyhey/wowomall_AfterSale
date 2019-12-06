@@ -4,11 +4,11 @@
 
     <select id="findAfterSaleById" parameterType="Integer" resultType="afterSalesService">
         select *
-        from aftersales_service where id = #{id}
+        from aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <insert id="addAfterSale" parameterType="afterSalesService" useGeneratedKeys="true" keyProperty="id">
-        insert into aftersales_service(gmt_create, gmt_modified, goods_type, apply_time, apply_reason, end_time, type, number, order_item_id)
-        values (now(),now(),#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId})  </insert>
+        insert into aftersales_service(gmt_create, gmt_modified, goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,is_deleted,be_applied)
+        values (now(),now(),#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId},0,0)  </insert>
 
 </mapper>
