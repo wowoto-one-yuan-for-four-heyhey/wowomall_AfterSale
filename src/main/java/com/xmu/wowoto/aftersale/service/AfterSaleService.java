@@ -17,6 +17,13 @@ public class AfterSaleService {
         ass.setBeApplied(false);
         ass.setBeDelete(false);
         afterSaleDao.addAfterSale(ass);
-        return ass;
+        Integer id= ass.getId();
+        AftersalesService ret=afterSaleDao.getAfterSale(id);
+        return ret;
+    }
+    public AftersalesService getAfterSale(Integer id)
+    {
+        AftersalesService ret =afterSaleDao.getAfterSale(id);
+        return ret;
     }
 }

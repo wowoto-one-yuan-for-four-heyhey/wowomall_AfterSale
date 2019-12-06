@@ -12,4 +12,5 @@ public class AfterSaleDao {
     public int addAfterSale(AftersalesService ass){
         return afterSaleMapper.addAfterSale(ass);
     }
+    public AftersalesService getAfterSale(Integer id) {return afterSaleMapper.findAfterSaleById(id);}
 }

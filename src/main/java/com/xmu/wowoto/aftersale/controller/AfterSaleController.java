@@ -5,9 +5,7 @@ import com.xmu.wowoto.aftersale.domain.AftersalesService;
 import com.xmu.wowoto.aftersale.service.AfterSaleService;
 import com.xmu.wowoto.aftersale.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("")
@@ -15,7 +13,7 @@ public class AfterSaleController {
     @Autowired
     AfterSaleService afterSaleService;
 
-    @PostMapping("order/refund")
+    @PostMapping("aftersales/refund")
     public Object applyForRefund(AfterSaleVO asvo) {
         AftersalesService ass = new AftersalesService();
         ass.setGoodsType(asvo.getGoods_type());
@@ -26,5 +24,12 @@ public class AfterSaleController {
         Object retObj = ResponseUtil.ok(retass);
         //logger.debug("submit的返回值："+retObj);
         return retObj;
+    }
+    @GetMapping("aftersales/{id}")
+    public Object getAfterSale(@PathVariable("id") Integer id)
+    {
+        AftersalesService ass=afterSaleService.getAfterSale(id);
+        Object ret=ResponseUtil.ok(ass);
+        return ret;
     }
 }

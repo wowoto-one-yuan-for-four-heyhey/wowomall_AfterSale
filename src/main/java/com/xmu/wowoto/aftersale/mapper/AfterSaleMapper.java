@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AfterSaleMapper {
     int addAfterSale(AftersalesService aftersalesService);
+
+    AftersalesService findAfterSaleById(Integer id);
 }
