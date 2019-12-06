@@ -3,7 +3,7 @@ package com.xmu.wowoto.aftersale.controller.vo;
 import javax.xml.crypto.Data;
 
 public class AfterSaleVO {
-    private Short goods_type;
+    private Integer goods_type;
 
     private String apply_reason;
 
@@ -25,9 +25,6 @@ public class AfterSaleVO {
                 '}';
     }
 
-    public Short getGoods_type() {
-        return goods_type;
-    }
 
     public String getApply_reason() {
         return apply_reason;
@@ -41,8 +38,12 @@ public class AfterSaleVO {
         return order_item_id;
     }
 
-    public void setGoods_type(Short goods_type) {
+    public void setGoods_type(Integer goods_type) {
         this.goods_type = goods_type;
+    }
+
+    public Integer getGoods_type() {
+        return goods_type;
     }
 
     public void setApply_reason(String apply_reason) {

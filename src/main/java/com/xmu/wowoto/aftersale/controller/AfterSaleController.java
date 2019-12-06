@@ -14,7 +14,7 @@ public class AfterSaleController {
     AfterSaleService afterSaleService;
 
     @PostMapping("aftersales/refund")
-    public Object applyForRefund(AfterSaleVO asvo) {
+    public Object applyForRefund(@RequestBody AfterSaleVO asvo) {
         AftersalesService ass = new AftersalesService();
         ass.setGoodsType(asvo.getGoods_type());
         ass.setApplyReason(asvo.getApply_reason());
@@ -23,6 +23,17 @@ public class AfterSaleController {
         AftersalesService retass=afterSaleService.refund(ass);
         Object retObj = ResponseUtil.ok(retass);
         //logger.debug("submit的返回值："+retObj);
+        return retObj;
+    }
+    @PostMapping("aftersales/exchange")
+    public Object applyForExchange(@RequestBody AfterSaleVO asvo) {
+        AftersalesService ass = new AftersalesService();
+        ass.setGoodsType(asvo.getGoods_type());
+        ass.setApplyReason(asvo.getApply_reason());
+        ass.setNumber(asvo.getNumber());
+        ass.setOrderItemId(asvo.getOrder_item_id());
+        AftersalesService retass=afterSaleService.exchange(ass);
+        Object retObj = ResponseUtil.ok(retass);
         return retObj;
     }
     @GetMapping("aftersales/{id}")
