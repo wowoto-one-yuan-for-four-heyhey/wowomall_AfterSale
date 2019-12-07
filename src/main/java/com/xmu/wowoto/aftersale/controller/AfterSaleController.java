@@ -13,30 +13,20 @@ public class AfterSaleController {
     @Autowired
     AfterSaleService afterSaleService;
 
-    @PostMapping("aftersales/refund")
-    public Object applyForRefund(@RequestBody AfterSaleVO asvo) {
+    @PostMapping("afterSaleService/")
+    public Object addAfterSale(@RequestBody AfterSaleVO asvo) {
         AftersalesService ass = new AftersalesService();
+        ass.setType(asvo.getType());
         ass.setGoodsType(asvo.getGoods_type());
         ass.setApplyReason(asvo.getApply_reason());
         ass.setNumber(asvo.getNumber());
         ass.setOrderItemId(asvo.getOrder_item_id());
-        AftersalesService retass=afterSaleService.refund(ass);
+        AftersalesService retass=afterSaleService.addAfterSale(ass);
         Object retObj = ResponseUtil.ok(retass);
         //logger.debug("submit的返回值："+retObj);
         return retObj;
     }
-    @PostMapping("aftersales/exchange")
-    public Object applyForExchange(@RequestBody AfterSaleVO asvo) {
-        AftersalesService ass = new AftersalesService();
-        ass.setGoodsType(asvo.getGoods_type());
-        ass.setApplyReason(asvo.getApply_reason());
-        ass.setNumber(asvo.getNumber());
-        ass.setOrderItemId(asvo.getOrder_item_id());
-        AftersalesService retass=afterSaleService.exchange(ass);
-        Object retObj = ResponseUtil.ok(retass);
-        return retObj;
-    }
-    @GetMapping("aftersales/{id}")
+    @GetMapping("afterSaleService/{id}")
     public Object getAfterSale(@PathVariable("id") Integer id)
     {
         AftersalesService ass=afterSaleService.getAfterSale(id);

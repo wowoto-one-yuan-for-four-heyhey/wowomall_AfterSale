@@ -5,6 +5,8 @@ import javax.xml.crypto.Data;
 public class AfterSaleVO {
     private Integer goods_type;
 
+    private boolean type;
+
     private String apply_reason;
 
     private Integer number;
@@ -25,6 +27,13 @@ public class AfterSaleVO {
                 '}';
     }
 
+    public boolean getType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
+    }
 
     public String getApply_reason() {
         return apply_reason;
