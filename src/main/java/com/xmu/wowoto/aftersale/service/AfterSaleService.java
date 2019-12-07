@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class AfterSaleService {
@@ -18,9 +19,30 @@ public class AfterSaleService {
         AftersalesService ret=afterSaleDao.getAfterSale(id);
         return ret;
     }
-    public AftersalesService getAfterSale(Integer id)
-    {
+    public AftersalesService getAfterSale(Integer id) {
         AftersalesService ret =afterSaleDao.getAfterSale(id);
         return ret;
+    }
+    public boolean deleteAfterSale(Integer id){
+        AftersalesService ass=new AftersalesService();
+        ass.setId(id);
+        ass.setBeDeleted(true);
+        int result=afterSaleDao.updateAfterSale(ass);
+        if(result!=0)
+        return true;
+        else return false;
+    }
+    public boolean applyAfterSale(Integer id){
+        int result=afterSaleDao.applyAfterSale(id);
+        if(result!=0)
+            return true;
+        else return false;
+    }
+    public AftersalesService updateUser(Integer id,AftersalesService ass){
+        afterSaleDao.updateAfterSale(ass);
+        return afterSaleDao.getAfterSale(id);
+    }
+    public List<AftersalesService> findAllAfterSale() {
+    return afterSaleDao.findAllAfterSale();
     }
 }
