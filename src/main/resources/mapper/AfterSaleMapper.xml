@@ -11,13 +11,19 @@
         from aftersales_service where id = #{id} and be_deleted = 0
     </select>
 
+    <select id="findAfterSaleByUserId" parameterType="Integer" resultType="afterSalesService">
+        select *
+        from aftersales_service where user_id = #{id} and be_deleted = 0
+    </select>
+
     <insert id="addAfterSale" parameterType="afterSalesService" useGeneratedKeys="true" keyProperty="id">
-        insert into aftersales_service(gmt_create, gmt_modified, goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,be_deleted,be_applied,status_code)
-        values (now(),now(),#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId},0,0,0)  </insert>
+        insert into aftersales_service(gmt_create, gmt_modified, user_id,goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,be_deleted,be_applied,status_code)
+        values (now(),now(),#{userId},#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId},0,0,0)  </insert>
 
     <update id="updateAfterSale" parameterType="afterSalesService">
         update aftersales_service
         <trim prefix="set" suffixOverrides=",">
+            <if test="userId!=null">user_id=#{userId}</if>
             <if test="true">gmt_modified=now(),</if>
             <if test="beDeleted!=null">is_deleted=#{beDeleted},</if>
             <if test="goodsType!=null">goods_type=#{goodsType},</if>

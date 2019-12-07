@@ -45,4 +45,5 @@ public class AfterSaleService {
     public List<AftersalesService> findAllAfterSale() {
     return afterSaleDao.findAllAfterSale();
     }
+    public List<AftersalesService> findAfterSaleByUserId(Integer id){return afterSaleDao.findAfterSaleByUserId(id);}
 }

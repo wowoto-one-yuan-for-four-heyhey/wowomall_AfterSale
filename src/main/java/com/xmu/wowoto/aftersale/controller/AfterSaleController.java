@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/aftersaleService")
@@ -43,11 +42,13 @@ public class AfterSaleController {
         ass.setStatusCode(avo.getStatus_code());
         return ResponseUtil.ok(afterSaleService.updateUser(id,ass));
     }
-/*
+
     @GetMapping("user")
     @ApiOperation(value="用户查询售后服务列表  /list")
-    public Object userFindAftersaleServiceList();
-*/
+    public Object userFindAftersaleServiceList(Integer userId) {
+    return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId));
+    }
+
     @PostMapping("user")
     @ApiOperation(value="用户申请售后服务  ")
     public Object userApplyAftersaleService(@RequestBody AfterSaleVO asvo){

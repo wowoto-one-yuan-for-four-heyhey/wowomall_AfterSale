@@ -14,6 +14,6 @@ public interface AfterSaleMapper {
     AftersalesService findAfterSaleById(Integer id);
     int updateAfterSale(AftersalesService aftersalesService);
     int applyAfterSale(Integer id);
-
+    List<AftersalesService> findAfterSaleByUserId(Integer id);
     List<AftersalesService> findAllAfterSale();
 }
