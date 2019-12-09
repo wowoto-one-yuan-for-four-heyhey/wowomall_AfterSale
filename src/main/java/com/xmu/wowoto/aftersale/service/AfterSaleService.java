@@ -21,6 +21,7 @@ public class AfterSaleService {
     }
     public AftersalesService getAfterSale(Integer id) {
         AftersalesService ret =afterSaleDao.getAfterSale(id);
+        System.out.println(ret.getId());
         return ret;
     }
     public boolean deleteAfterSale(Integer id){

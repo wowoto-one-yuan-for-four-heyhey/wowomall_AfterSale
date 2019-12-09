@@ -53,6 +53,7 @@ public class AfterSaleController {
     @ApiOperation(value="用户申请售后服务  ")
     public Object userApplyAftersaleService(@RequestBody AfterSaleVO asvo){
         AftersalesService ass = new AftersalesService();
+        ass.setUserId(1001);
         ass.setType(asvo.getType());
         ass.setGoodsType(asvo.getGoods_type());
         ass.setApplyReason(asvo.getApply_reason());
