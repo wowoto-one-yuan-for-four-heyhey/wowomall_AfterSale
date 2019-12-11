@@ -30,7 +30,7 @@
         <trim prefix="set" suffixOverrides=",">
             <if test="userId!=null">user_id=#{userId}</if>
             <if test="true">gmt_modified=now(),</if>
-            <if test="beDeleted!=null">is_deleted=#{beDeleted},</if>
+            <if test="beDeleted!=null">be_deleted=#{beDeleted},</if>
             <if test="goodsType!=null">goods_type=#{goodsType},</if>
             <if test="applyReason!=null">apply_reason=#{applyReason},</if>
             <if test="type!=null">type=#{type},</if>

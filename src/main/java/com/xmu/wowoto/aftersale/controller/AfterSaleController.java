@@ -22,8 +22,9 @@ public class AfterSaleController {
     @ApiOperation(value="管理员查询售后服务列表  /list")
     public Object adminFindAftersalesServiceList(Integer page,Integer limit)
     {
-        if(page==null || limit==null)
-            return ResponseUtil.fail(402,"bad params!");
+
+        if(page==null || limit==null || page < 1 || limit < 1)
+        {   return ResponseUtil.fail(402,"bad params!");}
         Integer begin=limit*(page-1);
         List<AftersalesService> assList=afterSaleService.findAllAfterSale(begin,limit);
         Object ret =ResponseUtil.ok(assList);
@@ -33,8 +34,8 @@ public class AfterSaleController {
     @GetMapping("aftersalesServices/{id}")
     @ApiOperation(value="管理员查询某一售后服务具体信息  ")
     public Object adminFindAftersalesService(@PathVariable("id") Integer id){
-        if(id==null)
-            return ResponseUtil.fail(402,"bad params!");
+        if(id==null || id < 1)
+        {    return ResponseUtil.fail(402,"bad params!");}
         AftersalesService ass=afterSaleService.getAfterSale(id);
         Object ret=ResponseUtil.ok(ass);
         return ret;
@@ -45,28 +46,28 @@ public class AfterSaleController {
     @ApiOperation(value="管理员修改售后服务的信息  /update")
     public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
         if(id==null)
-            return ResponseUtil.fail(402,"bad params!");
+        {    return ResponseUtil.fail(402,"bad params!");}
         if((avo.getType()==false)&&(avo.getApply_reason()==null)&&(avo.getStatus_code()==null))
-            return ResponseUtil.fail(402,"bad params!");
+        {   return ResponseUtil.fail(402,"bad params!");}
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
         ass.setApplyReason(avo.getApply_reason());
         ass.setStatusCode(avo.getStatus_code());
         AftersalesService retass=afterSaleService.updateUser(id,ass);
         if(retass!=null)
-        return ResponseUtil.ok();
+        {return ResponseUtil.ok();}
         else
-            return ResponseUtil.fail(505,"Object dosen't exist!");
+        {    return ResponseUtil.fail(505,"Object dosen't exist!");}
     }
 
     @GetMapping("aftersalesService")
     @ApiOperation(value="用户查询售后服务列表  /list")
     public Object userFindAftersalesServiceList(Integer page,Integer limit) {
-        if(page==null || limit==null)
-            return ResponseUtil.fail(402,"bad params!");
+        if(page==null || limit==null|| page < 1||limit < 1){
+            return ResponseUtil.fail(402,"bad params!");}
         Integer begin=limit*(page-1);
         //TODO:假id
-        Integer userId=1;
+        Integer userId=10086;
     return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId,begin,limit));
     }
 
@@ -74,8 +75,8 @@ public class AfterSaleController {
     @ApiOperation(value="用户申请售后服务  ")
     public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
         if((asvo.getType()==false)||(asvo.getApply_reason()==null)||(asvo.getGoods_type()==null)
-        ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null))
-            return ResponseUtil.fail(402,"bad params!");
+        ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null)){
+            return ResponseUtil.fail(402,"bad params!");}
         AftersalesService ass = new AftersalesService();
         //TODO 假id
         ass.setUserId(1001);
@@ -85,11 +86,11 @@ public class AfterSaleController {
         ass.setNumber(asvo.getNumber());
         ass.setOrderItemId(asvo.getOrder_item_id());
         AftersalesService retass=afterSaleService.addAfterSale(ass);
-        if (retass!=null)
-            return ResponseUtil.ok(retass);
-        else
+        if (retass!=null){
+            return ResponseUtil.ok(retass);}
+        else{
             return ResponseUtil.fail(505,"Object dosen't exist!");
-    }
+    }}
 
     @GetMapping("user/aftersalesServices/{id}")
     @ApiOperation(value="用户查询某一售后服务具体信息  ")
@@ -98,8 +99,8 @@ public class AfterSaleController {
         //@TODO 假数据
         Integer userId=10086;
         Integer expect=afterSaleService.getUserIdById(id);
-        if(expect!=userId)
-            return ResponseUtil.fail(506,"Permission deny!");
+        if(expect == null ||!expect.equals(userId) )
+        {return ResponseUtil.fail(506,"Permission deny!");}
         AftersalesService ass=afterSaleService.getAfterSale(id);
         Object ret=ResponseUtil.ok(ass);
         return ret;
@@ -108,10 +109,15 @@ public class AfterSaleController {
     @PutMapping("user/aftersalesServices/{id}")
     @ApiOperation(value="用户修改售后服务的信息(比如状态:取消售后服务)  /update")
     public Object userUpdateAftersaleService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
+
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
         ass.setApplyReason(avo.getApply_reason());
         ass.setStatusCode(null);
+        AftersalesService find = afterSaleService.getAfterSale(id);
+        if(find != null) {
+            return ResponseUtil.fail(506,"Permission deny!");
+        }
         return afterSaleService.updateUser(id,ass);
     }
 
