@@ -46,5 +46,6 @@ public class AfterSaleService {
     public List<AftersalesService> findAllAfterSale(Integer begin,Integer limit) {
     return afterSaleDao.findAllAfterSale(begin,limit);
     }
+    public Integer getUserIdById(Integer id){return afterSaleDao.getUserIdById(id);}
     public List<AftersalesService> findAfterSaleByUserId(Integer id,Integer begin,Integer limit){return afterSaleDao.findAfterSaleByUserId(id,begin,limit);}
 }

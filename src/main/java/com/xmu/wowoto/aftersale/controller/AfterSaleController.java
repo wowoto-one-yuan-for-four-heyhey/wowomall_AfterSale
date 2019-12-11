@@ -91,19 +91,21 @@ public class AfterSaleController {
             return ResponseUtil.fail(505,"Object dosen't exist!");
     }
 
-    @GetMapping("{id}/user")
+    @GetMapping("user/aftersalesServices/{id}")
     @ApiOperation(value="用户查询某一售后服务具体信息  ")
     public Object userFindAftersaleService(@PathVariable("id") Integer id){
         //@todo 用户只能看自己的订单
         //@TODO 假数据
         Integer userId=10086;
-
+        Integer expect=afterSaleService.getUserIdById(id);
+        if(expect!=userId)
+            return ResponseUtil.fail(506,"Permission deny!");
         AftersalesService ass=afterSaleService.getAfterSale(id);
         Object ret=ResponseUtil.ok(ass);
         return ret;
     }
 
-    @PutMapping("{id}/user")
+    @PutMapping("user/aftersalesServices/{id}")
     @ApiOperation(value="用户修改售后服务的信息(比如状态:取消售后服务)  /update")
     public Object userUpdateAftersaleService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
         AftersalesService ass = new AftersalesService();
@@ -113,7 +115,7 @@ public class AfterSaleController {
         return afterSaleService.updateUser(id,ass);
     }
 
-    @DeleteMapping("{id}/user")
+    @DeleteMapping("aftersalesServices/{id}")
     @ApiOperation(value="用户删除某一个售后服务的信息  /delete")
     public Object userDeleteAftersaleService(@PathVariable("id")Integer id){
         return ResponseUtil.ok(afterSaleService.deleteAfterSale(id));

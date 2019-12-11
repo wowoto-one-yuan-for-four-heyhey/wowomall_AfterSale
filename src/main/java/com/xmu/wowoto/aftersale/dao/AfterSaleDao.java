@@ -19,6 +19,7 @@ public class AfterSaleDao {
         as.setBeDeleted(false);
         return as;
     }
+    public Integer getUserIdById(Integer id){return afterSaleMapper.getUserIdById(id);}
     public int updateAfterSale(AftersalesService ass){return afterSaleMapper.updateAfterSale(ass);}
     public int applyAfterSale(Integer id){return afterSaleMapper.applyAfterSale(id);}
     public List<AftersalesService> findAllAfterSale(Integer begin,Integer limit){return afterSaleMapper.findAllAfterSale(begin,limit);}
