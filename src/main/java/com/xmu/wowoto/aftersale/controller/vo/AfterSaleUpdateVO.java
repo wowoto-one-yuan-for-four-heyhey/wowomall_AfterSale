@@ -6,13 +6,11 @@ public class AfterSaleUpdateVO {
 
     private boolean type;
 
+
     private String apply_reason;
 
     private Integer status_code;
 
-    /**************************
-     生成代码
-     **************************/
     @Override
     public String toString() {
         return "AfterSaleUpdateVO{" +
@@ -21,6 +19,20 @@ public class AfterSaleUpdateVO {
                 ", status_code=" + status_code +
                 '}';
     }
+
+    /**************************
+     生成代码
+     **************************/
+
+
+
+
+
+    public boolean isType() {
+        return type;
+    }
+
+
 
     public void setType(boolean type) {
         this.type = type;

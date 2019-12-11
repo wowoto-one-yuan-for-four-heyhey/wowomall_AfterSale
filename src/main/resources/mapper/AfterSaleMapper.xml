@@ -13,7 +13,12 @@
 
     <select id="findAfterSaleByUserId" parameterType="Integer" resultType="afterSalesService">
         select *
-        from aftersales_service where user_id = #{id} and be_deleted = 0
+        from aftersales_service where user_id = #{id} and be_deleted = 0 limit #{begin},#{limit}
+    </select>
+
+    <select id="getUserIdById" parameterType="Integer" resultType="Integer">
+        select user_id
+        from aftersales_service where id = #{id} and be_deleted = 0
     </select>
 
     <insert id="addAfterSale" parameterType="afterSalesService" useGeneratedKeys="true" keyProperty="id">

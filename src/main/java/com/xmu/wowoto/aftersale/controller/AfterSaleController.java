@@ -13,14 +13,14 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/aftersaleService")
+@RequestMapping("")
 public class AfterSaleController {
     @Autowired
     AfterSaleService afterSaleService;
 
-    @GetMapping("admin")
+    @GetMapping("admin/aftersalesServices")
     @ApiOperation(value="管理员查询售后服务列表  /list")
-    public Object adminFindAftersaleServiceList(Integer page,Integer limit)
+    public Object adminFindAftersalesServiceList(Integer page,Integer limit)
     {
         if(page==null || limit==null)
             return ResponseUtil.fail(402,"bad params!");
@@ -30,35 +30,54 @@ public class AfterSaleController {
         return ret;
     }
 
-    @GetMapping("{id}/admin")
+    @GetMapping("aftersalesServices/{id}")
     @ApiOperation(value="管理员查询某一售后服务具体信息  ")
-    public Object adminFindAftersaleService(@PathVariable("id") Integer id){
+    public Object adminFindAftersalesService(@PathVariable("id") Integer id){
+        if(id==null)
+            return ResponseUtil.fail(402,"bad params!");
         AftersalesService ass=afterSaleService.getAfterSale(id);
         Object ret=ResponseUtil.ok(ass);
         return ret;
     }
 
 
-    @PutMapping("{id}/admin")
+    @PutMapping("admin/aftersalesServices/{id}")
     @ApiOperation(value="管理员修改售后服务的信息  /update")
-    public Object adminUpdateAftersaleService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
+    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
+        if(id==null)
+            return ResponseUtil.fail(402,"bad params!");
+        if((avo.getType()==false)&&(avo.getApply_reason()==null)&&(avo.getStatus_code()==null))
+            return ResponseUtil.fail(402,"bad params!");
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
         ass.setApplyReason(avo.getApply_reason());
         ass.setStatusCode(avo.getStatus_code());
-        return ResponseUtil.ok(afterSaleService.updateUser(id,ass));
+        AftersalesService retass=afterSaleService.updateUser(id,ass);
+        if(retass!=null)
+        return ResponseUtil.ok();
+        else
+            return ResponseUtil.fail(505,"Object dosen't exist!");
     }
 
-    @GetMapping("user")
+    @GetMapping("aftersalesService")
     @ApiOperation(value="用户查询售后服务列表  /list")
-    public Object userFindAftersaleServiceList(Integer userId) {
-    return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId));
+    public Object userFindAftersalesServiceList(Integer page,Integer limit) {
+        if(page==null || limit==null)
+            return ResponseUtil.fail(402,"bad params!");
+        Integer begin=limit*(page-1);
+        //TODO:假id
+        Integer userId=1;
+    return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId,begin,limit));
     }
 
-    @PostMapping("user")
+    @PostMapping("aftersalesService")
     @ApiOperation(value="用户申请售后服务  ")
-    public Object userApplyAftersaleService(@RequestBody AfterSaleVO asvo){
+    public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
+        if((asvo.getType()==false)||(asvo.getApply_reason()==null)||(asvo.getGoods_type()==null)
+        ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null))
+            return ResponseUtil.fail(402,"bad params!");
         AftersalesService ass = new AftersalesService();
+        //TODO 假id
         ass.setUserId(1001);
         ass.setType(asvo.getType());
         ass.setGoodsType(asvo.getGoods_type());
@@ -66,15 +85,19 @@ public class AfterSaleController {
         ass.setNumber(asvo.getNumber());
         ass.setOrderItemId(asvo.getOrder_item_id());
         AftersalesService retass=afterSaleService.addAfterSale(ass);
-        Object retObj = ResponseUtil.ok(retass);
-        //logger.debug("submit的返回值："+retObj);
-        return retObj;
+        if (retass!=null)
+            return ResponseUtil.ok(retass);
+        else
+            return ResponseUtil.fail(505,"Object dosen't exist!");
     }
 
     @GetMapping("{id}/user")
     @ApiOperation(value="用户查询某一售后服务具体信息  ")
     public Object userFindAftersaleService(@PathVariable("id") Integer id){
         //@todo 用户只能看自己的订单
+        //@TODO 假数据
+        Integer userId=10086;
+
         AftersalesService ass=afterSaleService.getAfterSale(id);
         Object ret=ResponseUtil.ok(ass);
         return ret;

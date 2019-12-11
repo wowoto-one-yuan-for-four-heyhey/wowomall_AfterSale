@@ -22,5 +22,5 @@ public class AfterSaleDao {
     public int updateAfterSale(AftersalesService ass){return afterSaleMapper.updateAfterSale(ass);}
     public int applyAfterSale(Integer id){return afterSaleMapper.applyAfterSale(id);}
     public List<AftersalesService> findAllAfterSale(Integer begin,Integer limit){return afterSaleMapper.findAllAfterSale(begin,limit);}
-    public List<AftersalesService> findAfterSaleByUserId(Integer id){return afterSaleMapper.findAfterSaleByUserId(id);}
+    public List<AftersalesService> findAfterSaleByUserId(Integer id,Integer begin,Integer limit){return afterSaleMapper.findAfterSaleByUserId(id,begin,limit);}
 }
