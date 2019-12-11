@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/aftersaleService")
@@ -18,9 +20,13 @@ public class AfterSaleController {
 
     @GetMapping("admin")
     @ApiOperation(value="管理员查询售后服务列表  /list")
-    public Object adminFindAftersaleServiceList()
+    public Object adminFindAftersaleServiceList(Integer page,Integer limit)
     {
-        Object ret =ResponseUtil.ok(afterSaleService.findAllAfterSale());
+        if(page==null || limit==null)
+            return ResponseUtil.fail(402,"bad params!");
+        Integer begin=limit*(page-1);
+        List<AftersalesService> assList=afterSaleService.findAllAfterSale(begin,limit);
+        Object ret =ResponseUtil.ok(assList);
         return ret;
     }
 

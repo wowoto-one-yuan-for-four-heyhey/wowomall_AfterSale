@@ -43,8 +43,8 @@ public class AfterSaleService {
         afterSaleDao.updateAfterSale(ass);
         return afterSaleDao.getAfterSale(id);
     }
-    public List<AftersalesService> findAllAfterSale() {
-    return afterSaleDao.findAllAfterSale();
+    public List<AftersalesService> findAllAfterSale(Integer begin,Integer limit) {
+    return afterSaleDao.findAllAfterSale(begin,limit);
     }
     public List<AftersalesService> findAfterSaleByUserId(Integer id){return afterSaleDao.findAfterSaleByUserId(id);}
 }

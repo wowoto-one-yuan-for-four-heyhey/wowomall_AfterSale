@@ -4,7 +4,7 @@
 
     <select id="findAllAfterSale" resultType="afterSalesService">
         select *
-        from aftersales_service where be_deleted = 0
+        from aftersales_service where be_deleted = 0 limit #{begin},#{limit}
     </select>
     <select id="findAfterSaleById" parameterType="Integer" resultType="afterSalesService">
         select *
