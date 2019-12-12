@@ -12,7 +12,10 @@ import org.apache.commons.logging.LogFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @author wowoto
+ * @date 12/12/2019
+ */
 public class JacksonUtil {
 
     private static final Log logger = LogFactory.getLog(JacksonUtil.class);
