@@ -20,8 +20,7 @@ public class AfterSaleService {
         return ret;
     }
     public AftersalesService getAfterSale(Integer id) {
-        AftersalesService ret =afterSaleDao.getAfterSale(id);
-        System.out.println(ret.getId());
+        AftersalesService ret = afterSaleDao.getAfterSale(id);
         return ret;
     }
     public boolean deleteAfterSale(Integer id){

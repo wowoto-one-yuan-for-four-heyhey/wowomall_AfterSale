@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -21,6 +22,9 @@ import java.util.List;
 public class AfterSaleController {
     @Autowired
     AfterSaleService afterSaleService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("admin/aftersalesServices")
     @ApiOperation(value="管理员查询售后服务列表  /list")
@@ -44,7 +48,11 @@ public class AfterSaleController {
         if(id==null || id < 1)
         {    return ResponseUtil.fail(402,"bad params!");}
         AftersalesService ass=afterSaleService.getAfterSale(id);
-        return ResponseUtil.ok(ass);
+        if(ass != null){
+            return ResponseUtil.ok(ass);
+        }else {
+            return ResponseUtil.fail(402,"DB error!");
+        }
     }
 
 
@@ -80,8 +88,7 @@ public class AfterSaleController {
         if(page==null || limit==null|| page < 1||limit < 1){
             return ResponseUtil.fail(402,"bad params!");}
         Integer begin=limit*(page-1);
-        //TODO:假id
-        Integer userId=10086;
+        Integer userId= Integer.valueOf(request.getHeader("id"));
     return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId,begin,limit));
     }
 
@@ -94,8 +101,8 @@ public class AfterSaleController {
             return ResponseUtil.fail(402,"bad params!");
         }
         AftersalesService ass = new AftersalesService();
-        //TODO 假id
-        ass.setUserId(1001);
+        Integer userId = Integer.valueOf(request.getHeader("id"));
+        ass.setUserId(userId);
         ass.setType(asvo.getType());
         ass.setGoodsType(asvo.getGoods_type());
         ass.setApplyReason(asvo.getApply_reason());
@@ -116,8 +123,7 @@ public class AfterSaleController {
     @ApiOperation(value="用户查询某一售后服务具体信息  ")
     public Object userFindAftersaleService(@PathVariable("id") Integer id){
         //@todo 用户只能看自己的订单
-        //@TODO 假数据
-        Integer userId=10086;
+        Integer userId = Integer.valueOf(request.getHeader("id"));
         Integer expect=afterSaleService.getUserIdById(id);
         if(expect == null ||!expect.equals(userId) )
         {return ResponseUtil.fail(506,"Permission deny!");}
