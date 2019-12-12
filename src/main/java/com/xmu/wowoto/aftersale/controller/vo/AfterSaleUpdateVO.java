@@ -2,10 +2,13 @@ package com.xmu.wowoto.aftersale.controller.vo;
 
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * @author wowoto
+ * @date 12/12/2019
+ */
 public class AfterSaleUpdateVO {
 
-    private boolean type;
-
+    private Boolean type;
 
     private String apply_reason;
 
@@ -28,7 +31,7 @@ public class AfterSaleUpdateVO {
 
 
 
-    public boolean isType() {
+    public Boolean isType() {
         return type;
     }
 

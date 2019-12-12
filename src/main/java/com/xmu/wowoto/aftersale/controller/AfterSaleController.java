@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+/**
+ * @author wowoto
+ * @date 12/12/2019
+ */
 @RestController
 @RequestMapping("")
 public class AfterSaleController {
@@ -143,11 +146,6 @@ public class AfterSaleController {
         return ResponseUtil.ok(afterSaleService.deleteAfterSale(id));
     }
 
-
-
-
-
-    //自有
     @PutMapping("afterSaleServices/{id}/apply")
     public boolean applyAfterSale(@PathVariable("id")Integer id){return afterSaleService.applyAfterSale(id);}
 }

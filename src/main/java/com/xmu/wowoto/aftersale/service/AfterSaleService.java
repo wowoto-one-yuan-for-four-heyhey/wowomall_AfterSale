@@ -29,15 +29,16 @@ public class AfterSaleService {
         ass.setId(id);
         ass.setBeDeleted(true);
         int result=afterSaleDao.updateAfterSale(ass);
-        if(result!=0)
-        return true;
-        else return false;
+        if(result!=0){
+        return true;}
+        else {return false;}
     }
     public boolean applyAfterSale(Integer id){
         int result=afterSaleDao.applyAfterSale(id);
-        if(result!=0)
+        if(result!=0) {
             return true;
-        else return false;
+        }else {return false;
+    }
     }
     public AftersalesService updateUser(Integer id,AftersalesService ass){
         afterSaleDao.updateAfterSale(ass);

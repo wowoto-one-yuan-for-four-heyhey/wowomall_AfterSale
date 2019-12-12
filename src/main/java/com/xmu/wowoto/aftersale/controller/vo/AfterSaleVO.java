@@ -2,10 +2,14 @@ package com.xmu.wowoto.aftersale.controller.vo;
 
 import javax.xml.crypto.Data;
 
+/**
+ * @author wowoto
+ * @date 12/12/2019
+ */
 public class AfterSaleVO {
     private Integer goods_type;
 
-    private boolean type;
+    private Boolean type;
 
     private String apply_reason;
 
@@ -27,7 +31,7 @@ public class AfterSaleVO {
                 '}';
     }
 
-    public boolean getType() {
+    public Boolean getType() {
         return type;
     }
 
