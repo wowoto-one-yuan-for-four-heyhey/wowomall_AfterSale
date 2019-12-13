@@ -8,6 +8,7 @@ import com.xmu.wowoto.aftersale.service.OrderService;
 import com.xmu.wowoto.aftersale.service.impl.AfterSaleServiceImpl;
 import com.xmu.wowoto.aftersale.util.JacksonUtil;
 import com.xmu.wowoto.aftersale.util.ResponseUtil;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,7 @@ public class AfterSaleController {
     private HttpServletRequest request;
 
     @GetMapping("admin/afterSaleServices")
-    public Object adminFindAftersalesServiceList(Integer page,Integer limit)
-    {
+    public Object adminFindAftersalesServiceList(Integer page,Integer limit) {
 
         if(page==null || limit==null || page < 1 || limit < 1)
         {
@@ -57,9 +57,8 @@ public class AfterSaleController {
         }
     }
 
-
     @PutMapping("admin/afterSaleServices/{id}")
-    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AdminAfterSaleUpdateVO avo){
+    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @NotNull @RequestBody AdminAfterSaleUpdateVO avo){
         if(id==null)
         {
             return ResponseUtil.fail(402,"bad params!");
@@ -96,7 +95,7 @@ public class AfterSaleController {
     }
 
     @PostMapping("afterSaleServices")
-    public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
+    public Object userApplyAftersalesService(@NotNull @RequestBody AfterSaleVO asvo){
         if((asvo.getType()!=null)||(asvo.getApplyReason()==null)
         ||(asvo.getNumber()==null)||(asvo.getOrderItemId()==null))
         {
@@ -147,11 +146,21 @@ public class AfterSaleController {
         if(find != null) {
             return ResponseUtil.fail(506,"Permission deny!");
         }
-        return afterSaleService.updateUser(id,ass);
+        AftersalesService ret=afterSaleService.updateUser(id,ass);
+        if(ret!=null)
+        {return ResponseUtil.ok(ret);}
+        else
+        {
+            return ResponseUtil.fail(505,"Object dosen't exist!");
+        }
     }
 
     @DeleteMapping("aftersaleServices/{id}")
     public Object userDeleteAftersaleService(@PathVariable("id")Integer id){
-        return ResponseUtil.ok(afterSaleService.deleteAfterSale(id));
+        if(!afterSaleService.deleteAfterSale(id))  {
+            return ResponseUtil.fail(505,"Object dosen't exist!");
+        }
+        else
+        {return ResponseUtil.ok(true);}
     }
 }
