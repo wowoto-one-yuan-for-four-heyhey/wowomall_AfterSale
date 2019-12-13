@@ -4,7 +4,9 @@ import com.xmu.wowoto.aftersale.controller.vo.AdminAfterSaleUpdateVO;
 import com.xmu.wowoto.aftersale.controller.vo.AfterSaleUpdateVO;
 import com.xmu.wowoto.aftersale.controller.vo.AfterSaleVO;
 import com.xmu.wowoto.aftersale.domain.AftersalesService;
+import com.xmu.wowoto.aftersale.service.OrderService;
 import com.xmu.wowoto.aftersale.service.impl.AfterSaleServiceImpl;
+import com.xmu.wowoto.aftersale.util.JacksonUtil;
 import com.xmu.wowoto.aftersale.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,9 @@ import java.util.List;
 public class AfterSaleController {
     @Autowired
     AfterSaleServiceImpl afterSaleService;
+
+    @Autowired
+    OrderService orderService;
 
     @Autowired
     private HttpServletRequest request;
@@ -92,7 +97,7 @@ public class AfterSaleController {
 
     @PostMapping("afterSaleServices")
     public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
-        if((asvo.getType()!=null)||(asvo.getApply_reason()==null)||(asvo.getGoods_type()==null)
+        if((asvo.getType()!=null)||(asvo.getApply_reason()==null)
         ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null))
         {
             return ResponseUtil.fail(402,"bad params!");
@@ -101,7 +106,9 @@ public class AfterSaleController {
         Integer userId = Integer.valueOf(request.getHeader("id"));
         ass.setUserId(userId);
         ass.setType(asvo.getType());
-        ass.setGoodsType(asvo.getGoods_type());
+        Object ret=orderService.findOrderItemType(asvo.getOrder_item_id());
+        Integer type= JacksonUtil.parseInteger(ret.toString(),"data");
+        ass.setGoodsType(type);
         ass.setApplyReason(asvo.getApply_reason());
         ass.setNumber(asvo.getNumber());
         ass.setOrderItemId(asvo.getOrder_item_id());

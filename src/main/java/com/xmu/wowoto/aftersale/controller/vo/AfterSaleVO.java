@@ -7,8 +7,6 @@ import javax.xml.crypto.Data;
  * @date 12/12/2019
  */
 public class AfterSaleVO {
-    private Integer goods_type;
-
     private Integer type;
 
     private String apply_reason;
@@ -24,12 +22,13 @@ public class AfterSaleVO {
     @Override
     public String toString() {
         return "AfterSaleVO{" +
-                "goods_type=" + goods_type +
+                "type=" + type +
                 ", apply_reason='" + apply_reason + '\'' +
                 ", number=" + number +
                 ", order_item_id=" + order_item_id +
                 '}';
     }
+
 
     public Integer getType() {
         return type;
@@ -49,14 +48,6 @@ public class AfterSaleVO {
 
     public Integer getOrder_item_id() {
         return order_item_id;
-    }
-
-    public void setGoods_type(Integer goods_type) {
-        this.goods_type = goods_type;
-    }
-
-    public Integer getGoods_type() {
-        return goods_type;
     }
 
     public void setApply_reason(String apply_reason) {
