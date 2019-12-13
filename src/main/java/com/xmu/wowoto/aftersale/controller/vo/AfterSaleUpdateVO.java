@@ -1,56 +1,48 @@
 package com.xmu.wowoto.aftersale.controller.vo;
 
-import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * @author wowoto
- * @date 12/12/2019
+ * @author MedalWill
+ * @date 2019/12/13 17:56
  */
 public class AfterSaleUpdateVO {
 
     private Integer type;
 
-    private String apply_reason;
+    private String applyReason;
 
-    private Integer status_code;
+    private Integer statusCode;
 
     @Override
     public String toString() {
         return "AfterSaleUpdateVO{" +
                 "type=" + type +
-                ", apply_reason='" + apply_reason + '\'' +
-                ", status_code=" + status_code +
+                ", applyReason='" + applyReason + '\'' +
+                ", statusCode=" + statusCode +
                 '}';
-    }
-
-
-    /**************************
-     生成代码
-     **************************/
-
-    public Integer getType() {
-        return type;
     }
 
     public void setType(Integer type) {
         this.type = type;
     }
 
-
-    public void setApply_reason(String apply_reason) {
-        this.apply_reason = apply_reason;
+    public void setApplyReason(String applyReason) {
+        this.applyReason = applyReason;
     }
 
-    public void setStatus_code(Integer status_code) {
-        this.status_code = status_code;
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
     }
 
-
-    public String getApply_reason() {
-        return apply_reason;
+    public Integer getType() {
+        return type;
     }
 
-    public Integer getStatus_code() {
-        return status_code;
+    public String getApplyReason() {
+        return applyReason;
+    }
+
+    public Integer getStatusCode() {
+        return statusCode;
     }
 }

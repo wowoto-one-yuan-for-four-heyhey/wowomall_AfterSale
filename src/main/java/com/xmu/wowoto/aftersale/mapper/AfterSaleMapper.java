@@ -6,11 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+/**
+ * @author MedalWill
+ * @date 2019/12/13 17:56
+ */
 @Mapper
 @Repository
 public interface AfterSaleMapper {
     int addAfterSale(AftersalesService aftersalesService);
-
     AftersalesService findAfterSaleById(Integer id);
     int updateAfterSale(AftersalesService aftersalesService);
     int applyAfterSale(Integer id);

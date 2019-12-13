@@ -1,9 +1,10 @@
 package com.xmu.wowoto.aftersale.controller;
 
+import com.xmu.wowoto.aftersale.controller.vo.AdminAfterSaleUpdateVO;
 import com.xmu.wowoto.aftersale.controller.vo.AfterSaleUpdateVO;
 import com.xmu.wowoto.aftersale.controller.vo.AfterSaleVO;
 import com.xmu.wowoto.aftersale.domain.AftersalesService;
-import com.xmu.wowoto.aftersale.service.AfterSaleService;
+import com.xmu.wowoto.aftersale.service.impl.AfterSaleServiceImpl;
 import com.xmu.wowoto.aftersale.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * @author wowoto
- * @date 12/12/2019
+ * @author MedalWill
+ * @date 2019/12/13 17:56
  */
 @RestController
 @RequestMapping("")
 public class AfterSaleController {
     @Autowired
-    AfterSaleService afterSaleService;
+    AfterSaleServiceImpl afterSaleService;
 
     @Autowired
     private HttpServletRequest request;
@@ -53,23 +54,22 @@ public class AfterSaleController {
 
 
     @PutMapping("admin/afterSaleServices/{id}")
-    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
-        if(afterSaleService.getAfterSale(id)==null)
-        {
-            return ResponseUtil.fail(505,"数据不存在！");
-        }
+    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AdminAfterSaleUpdateVO avo){
         if(id==null)
         {
             return ResponseUtil.fail(402,"bad params!");
         }
-        if((avo.getType()!=null)&&(avo.getApply_reason()==null)&&(avo.getStatus_code()==null))
+        if(afterSaleService.getAfterSale(id)==null)
+        {
+            return ResponseUtil.fail(505,"数据不存在！");
+        }
+        if((avo.getBeApplied()==null)&&(avo.getStatus()==null))
         {
             return ResponseUtil.fail(402,"bad params!");
         }
         AftersalesService ass = new AftersalesService();
-        ass.setType(avo.getType());
-        ass.setApplyReason(avo.getApply_reason());
-        ass.setStatusCode(avo.getStatus_code());
+        ass.setType(avo.getStatus());
+        ass.setApplyReason(avo.getBeApplied());
         AftersalesService retass=afterSaleService.updateUser(id,ass);
         if(retass!=null)
         {
@@ -134,7 +134,7 @@ public class AfterSaleController {
         }
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
-        ass.setApplyReason(avo.getApply_reason());
+        ass.setApplyReason(avo.getApplyReason());
         ass.setStatusCode(null);
         AftersalesService find = afterSaleService.getAfterSale(id);
         if(find != null) {

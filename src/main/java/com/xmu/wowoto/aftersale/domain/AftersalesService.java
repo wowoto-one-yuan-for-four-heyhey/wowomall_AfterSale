@@ -8,10 +8,9 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 /**
- * @Author: 数据库与对象模型标准组
- * @Description: 订单明细
- * @Date: Created in 14:50 2019/12/11
- **/
+ * @author MedalWill
+ * @date 2019/12/13 17:56
+ */
 @Getter
 @Setter
 @ToString
