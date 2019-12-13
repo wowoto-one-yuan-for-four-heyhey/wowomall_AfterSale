@@ -5,9 +5,7 @@ import com.xmu.wowoto.aftersale.controller.vo.AfterSaleVO;
 import com.xmu.wowoto.aftersale.domain.AftersalesService;
 import com.xmu.wowoto.aftersale.service.AfterSaleService;
 import com.xmu.wowoto.aftersale.util.ResponseUtil;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +24,7 @@ public class AfterSaleController {
     @Autowired
     private HttpServletRequest request;
 
-    @GetMapping("admin/aftersalesServices")
-    @ApiOperation(value="管理员查询售后服务列表  /list")
+    @GetMapping("admin/afterSaleServices")
     public Object adminFindAftersalesServiceList(Integer page,Integer limit)
     {
 
@@ -42,8 +39,7 @@ public class AfterSaleController {
         return ResponseUtil.ok(assList);
     }
 
-    @GetMapping("aftersalesServices/{id}")
-    @ApiOperation(value="管理员查询某一售后服务具体信息  ")
+    @GetMapping("afterSaleServices/{id}")
     public Object adminFindAftersalesService(@PathVariable("id") Integer id){
         if(id==null || id < 1)
         {    return ResponseUtil.fail(402,"bad params!");}
@@ -56,14 +52,17 @@ public class AfterSaleController {
     }
 
 
-    @PutMapping("admin/aftersalesServices/{id}")
-    @ApiOperation(value="管理员修改售后服务的信息  /update")
+    @PutMapping("admin/afterSaleServices/{id}")
     public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
+        if(afterSaleService.getAfterSale(id)==null)
+        {
+            return ResponseUtil.fail(505,"数据不存在！");
+        }
         if(id==null)
         {
             return ResponseUtil.fail(402,"bad params!");
         }
-        if((!avo.getType())&&(avo.getApply_reason()==null)&&(avo.getStatus_code()==null))
+        if((avo.getType()!=null)&&(avo.getApply_reason()==null)&&(avo.getStatus_code()==null))
         {
             return ResponseUtil.fail(402,"bad params!");
         }
@@ -74,7 +73,7 @@ public class AfterSaleController {
         AftersalesService retass=afterSaleService.updateUser(id,ass);
         if(retass!=null)
         {
-            return ResponseUtil.ok();
+            return ResponseUtil.ok(retass);
         }
         else
         {
@@ -82,8 +81,7 @@ public class AfterSaleController {
         }
     }
 
-    @GetMapping("aftersalesService")
-    @ApiOperation(value="用户查询售后服务列表  /list")
+    @GetMapping("afterSaleServices")
     public Object userFindAftersalesServiceList(Integer page,Integer limit) {
         if(page==null || limit==null|| page < 1||limit < 1){
             return ResponseUtil.fail(402,"bad params!");}
@@ -92,10 +90,9 @@ public class AfterSaleController {
     return ResponseUtil.ok(afterSaleService.findAfterSaleByUserId(userId,begin,limit));
     }
 
-    @PostMapping("aftersalesService")
-    @ApiOperation(value="用户申请售后服务  ")
+    @PostMapping("afterSaleServices")
     public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
-        if((!asvo.getType())||(asvo.getApply_reason()==null)||(asvo.getGoods_type()==null)
+        if((asvo.getType()!=null)||(asvo.getApply_reason()==null)||(asvo.getGoods_type()==null)
         ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null))
         {
             return ResponseUtil.fail(402,"bad params!");
@@ -119,23 +116,22 @@ public class AfterSaleController {
         }
     }
 
-    @GetMapping("user/aftersalesServices/{id}")
-    @ApiOperation(value="用户查询某一售后服务具体信息  ")
+    @GetMapping("afterSaleServices/{id}")
     public Object userFindAftersaleService(@PathVariable("id") Integer id){
-        //@todo 用户只能看自己的订单
         Integer userId = Integer.valueOf(request.getHeader("id"));
         Integer expect=afterSaleService.getUserIdById(id);
         if(expect == null ||!expect.equals(userId) )
         {return ResponseUtil.fail(506,"Permission deny!");}
         AftersalesService ass=afterSaleService.getAfterSale(id);
-        Object ret=ResponseUtil.ok(ass);
-        return ret;
+        return ResponseUtil.ok(ass);
     }
 
-    @PutMapping("user/aftersalesServices/{id}")
-    @ApiOperation(value="用户修改售后服务的信息(比如状态:取消售后服务)  /update")
+    @PutMapping("afterSaleServices/{id}")
     public Object userUpdateAftersaleService(@PathVariable("id")Integer id, @RequestBody AfterSaleUpdateVO avo){
-
+        if(afterSaleService.getAfterSale(id)==null)
+        {
+            return ResponseUtil.fail(505,"数据不存在！");
+        }
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
         ass.setApplyReason(avo.getApply_reason());
@@ -147,12 +143,8 @@ public class AfterSaleController {
         return afterSaleService.updateUser(id,ass);
     }
 
-    @DeleteMapping("aftersalesServices/{id}")
-    @ApiOperation(value="用户删除某一个售后服务的信息  /delete")
+    @DeleteMapping("aftersaleServices/{id}")
     public Object userDeleteAftersaleService(@PathVariable("id")Integer id){
         return ResponseUtil.ok(afterSaleService.deleteAfterSale(id));
     }
-
-    @PutMapping("afterSaleServices/{id}/apply")
-    public boolean applyAfterSale(@PathVariable("id")Integer id){return afterSaleService.applyAfterSale(id);}
 }

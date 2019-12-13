@@ -9,7 +9,7 @@ import javax.xml.crypto.Data;
 public class AfterSaleVO {
     private Integer goods_type;
 
-    private Boolean type;
+    private Integer type;
 
     private String apply_reason;
 
@@ -31,11 +31,11 @@ public class AfterSaleVO {
                 '}';
     }
 
-    public Boolean getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 

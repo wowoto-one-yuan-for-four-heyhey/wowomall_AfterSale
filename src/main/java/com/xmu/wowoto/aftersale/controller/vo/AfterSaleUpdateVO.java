@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 public class AfterSaleUpdateVO {
 
-    private Boolean type;
+    private Integer type;
 
     private String apply_reason;
 
@@ -23,23 +23,19 @@ public class AfterSaleUpdateVO {
                 '}';
     }
 
+
     /**************************
      生成代码
      **************************/
 
-
-
-
-
-    public Boolean isType() {
+    public Integer getType() {
         return type;
     }
 
-
-
-    public void setType(boolean type) {
+    public void setType(Integer type) {
         this.type = type;
     }
+
 
     public void setApply_reason(String apply_reason) {
         this.apply_reason = apply_reason;
@@ -49,9 +45,6 @@ public class AfterSaleUpdateVO {
         this.status_code = status_code;
     }
 
-    public boolean getType() {
-        return type;
-    }
 
     public String getApply_reason() {
         return apply_reason;
