@@ -15,6 +15,7 @@ import java.util.List;
 public class AfterSaleDao {
     @Autowired
     AfterSaleMapper afterSaleMapper;
+
     public int addAfterSale(AftersalesService ass){
         return afterSaleMapper.addAfterSale(ass);
     }

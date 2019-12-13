@@ -22,17 +22,6 @@ public class AfterSaleUpdateVO {
                 '}';
     }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public void setApplyReason(String applyReason) {
-        this.applyReason = applyReason;
-    }
-
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
-    }
 
     public Integer getType() {
         return type;

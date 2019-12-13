@@ -1,6 +1,5 @@
 package com.xmu.wowoto.aftersale.controller.vo;
 
-import javax.xml.crypto.Data;
 
 /**
  * @author wowoto
@@ -9,56 +8,44 @@ import javax.xml.crypto.Data;
 public class AfterSaleVO {
     private Integer type;
 
-    private String apply_reason;
+    private String applyReason;
 
     private Integer number;
 
-    private Integer order_item_id;
-
-    /***************************************************
-     * 生成代码
-     ***************************************************/
+    private Integer orderItemId;
 
     @Override
     public String toString() {
         return "AfterSaleVO{" +
                 "type=" + type +
-                ", apply_reason='" + apply_reason + '\'' +
+                ", applyReason='" + applyReason + '\'' +
                 ", number=" + number +
-                ", order_item_id=" + order_item_id +
+                ", orderItemId=" + orderItemId +
                 '}';
     }
 
+    /***************************************************
+     * 生成代码
+     ***************************************************/
 
     public Integer getType() {
         return type;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+
+    public String getApplyReason() {
+        return applyReason;
     }
 
-    public String getApply_reason() {
-        return apply_reason;
+    public Integer getOrderItemId() {
+        return orderItemId;
     }
+
 
     public Integer getNumber() {
         return number;
     }
 
-    public Integer getOrder_item_id() {
-        return order_item_id;
-    }
 
-    public void setApply_reason(String apply_reason) {
-        this.apply_reason = apply_reason;
-    }
 
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public void setOrder_item_id(Integer order_item_id) {
-        this.order_item_id = order_item_id;
-    }
 }

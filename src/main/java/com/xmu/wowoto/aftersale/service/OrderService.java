@@ -10,8 +10,17 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @date 2019/12/13 19:26
  */
 @Service
-@FeignClient("order")
+@FeignClient("Order")
 public interface OrderService {
+    
+/**
+ *根据orderItemId寻找goodsType
+*@author MedalWill
+*@date 2019/12/13
+*
+*@param  orderItemId orderitem的Id
+*@return Object
+*/
     @GetMapping("orderItem/{orderItemId}/goodsType")
-    public Object findOrderItemType(@PathVariable("orderItemId") Integer orderItemId );
+    Object findOrderItemType(@PathVariable("orderItemId") Integer orderItemId );
 }

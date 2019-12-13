@@ -97,8 +97,8 @@ public class AfterSaleController {
 
     @PostMapping("afterSaleServices")
     public Object userApplyAftersalesService(@RequestBody AfterSaleVO asvo){
-        if((asvo.getType()!=null)||(asvo.getApply_reason()==null)
-        ||(asvo.getNumber()==null)||(asvo.getOrder_item_id()==null))
+        if((asvo.getType()!=null)||(asvo.getApplyReason()==null)
+        ||(asvo.getNumber()==null)||(asvo.getOrderItemId()==null))
         {
             return ResponseUtil.fail(402,"bad params!");
         }
@@ -106,12 +106,12 @@ public class AfterSaleController {
         Integer userId = Integer.valueOf(request.getHeader("id"));
         ass.setUserId(userId);
         ass.setType(asvo.getType());
-        Object ret=orderService.findOrderItemType(asvo.getOrder_item_id());
+        Object ret=orderService.findOrderItemType(asvo.getOrderItemId());
         Integer type= JacksonUtil.parseInteger(ret.toString(),"data");
         ass.setGoodsType(type);
-        ass.setApplyReason(asvo.getApply_reason());
+        ass.setApplyReason(asvo.getApplyReason());
         ass.setNumber(asvo.getNumber());
-        ass.setOrderItemId(asvo.getOrder_item_id());
+        ass.setOrderItemId(asvo.getOrderItemId());
         AftersalesService retass=afterSaleService.addAfterSale(ass);
         if (retass!=null)
         {
@@ -142,7 +142,7 @@ public class AfterSaleController {
         AftersalesService ass = new AftersalesService();
         ass.setType(avo.getType());
         ass.setApplyReason(avo.getApplyReason());
-        ass.setStatusCode(null);
+        ass.setStatusCode(avo.getStatusCode());
         AftersalesService find = afterSaleService.getAfterSale(id);
         if(find != null) {
             return ResponseUtil.fail(506,"Permission deny!");

@@ -26,11 +26,4 @@ public class AdminAfterSaleUpdateVO {
         return status;
     }
 
-    public void setBeApplied(String beApplied) {
-        this.beApplied = beApplied;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 }

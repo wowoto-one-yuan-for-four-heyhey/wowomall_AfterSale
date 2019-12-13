@@ -25,7 +25,7 @@ public class AfterSaleServiceImpl implements AfterSaleService {
         { Integer id= ass.getId();
         return afterSaleDao.getAfterSale(id);
         }
-        else return null;
+        else {return null;}
     }
     @Override
     public AftersalesService getAfterSale(Integer id) {
