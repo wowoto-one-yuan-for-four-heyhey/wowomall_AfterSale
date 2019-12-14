@@ -32,7 +32,7 @@ public class AfterSaleController {
     private HttpServletRequest request;
 
     @GetMapping("admin/afterSaleServices")
-    public Object adminFindAftersalesServiceList(Integer page,Integer limit) {
+    public Object adminFindAftersalesServiceList(Integer page,Integer limit,Integer userId) {
 
         if(page==null || limit==null || page < 1 || limit < 1)
         {
@@ -40,12 +40,20 @@ public class AfterSaleController {
         }
 
         Integer begin=limit*(page-1);
-        List<AftersalesService> assList=afterSaleService.findAllAfterSale(begin,limit);
+        List<AftersalesService> assList;
 
+        if(userId!=null)
+        {
+            assList=afterSaleService.findAfterSaleByUserId(userId,begin,limit);
+        }
+        else
+        {
+             assList = afterSaleService.findAllAfterSale(begin, limit);
+        }
         return ResponseUtil.ok(assList);
     }
 
-    @GetMapping("afterSaleServices/{id}")
+    @GetMapping("admin/afterSaleServices/{id}")
     public Object adminFindAftersalesService(@PathVariable("id") Integer id){
         if(id==null || id < 1)
         {    return ResponseUtil.fail(402,"bad params!");}

@@ -4,25 +4,25 @@
 
     <select id="findAllAfterSale" resultType="afterSalesService">
         select *
-        from aftersales_service where be_deleted = 0 limit #{begin},#{limit}
+        from aftersales_service where is_deleted = 0 limit #{begin},#{limit}
     </select>
     <select id="findAfterSaleById" parameterType="Integer" resultType="afterSalesService">
         select *
-        from aftersales_service where id = #{id} and be_deleted = 0
+        from aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <select id="findAfterSaleByUserId" parameterType="Integer" resultType="afterSalesService">
         select *
-        from aftersales_service where user_id = #{id} and be_deleted = 0 limit #{begin},#{limit}
+        from aftersales_service where user_id = #{id} and is_deleted = 0 limit #{begin},#{limit}
     </select>
 
     <select id="getUserIdById" parameterType="Integer" resultType="Integer">
         select user_id
-        from aftersales_service where id = #{id} and be_deleted = 0
+        from aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <insert id="addAfterSale" parameterType="afterSalesService" useGeneratedKeys="true" keyProperty="id">
-        insert into aftersales_service(gmt_create, gmt_modified, user_id,goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,be_deleted,be_applied,status_code)
+        insert into aftersales_service(gmt_create, gmt_modified, user_id,goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,is_deleted,is_applied,status)
         values (now(),now(),#{userId},#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId},0,0,0)  </insert>
 
     <update id="updateAfterSale" parameterType="afterSalesService">
@@ -41,6 +41,6 @@
         WHERE id=#{id}
     </update>
     <update id="applyAfterSale" parameterType="Integer">
-        update aftersales_service set be_applied=1,end_time =now(),gmt_modified=now() where id=#{id}
+        update aftersales_service set is_applied=1,end_time =now(),gmt_modified=now() where id=#{id}
     </update>
 </mapper>
