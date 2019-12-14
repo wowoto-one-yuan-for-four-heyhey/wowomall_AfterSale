@@ -66,7 +66,7 @@ public class AfterSaleController {
     }
 
     @PutMapping("admin/afterSaleServices/{id}")
-    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @NotNull @RequestBody AdminAfterSaleUpdateVO avo){
+    public Object adminUpdateAftersalesService(@PathVariable("id")Integer id, @RequestBody AdminAfterSaleUpdateVO avo){
         if(id==null)
         {
             return ResponseUtil.fail(402,"bad params!");
@@ -79,9 +79,12 @@ public class AfterSaleController {
         {
             return ResponseUtil.fail(402,"bad params!");
         }
+        if(avo.getBeApplied()!=null)
+        {
+            return ResponseUtil.ok(afterSaleService.applyAfterSale(id));
+        }
         AftersalesService ass = new AftersalesService();
-        ass.setType(avo.getStatus());
-        ass.setApplyReason(avo.getBeApplied());
+        ass.setStatusCode(avo.getStatus());
         AftersalesService retass=afterSaleService.updateUser(id,ass);
         if(retass!=null)
         {

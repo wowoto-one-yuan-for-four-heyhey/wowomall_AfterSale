@@ -3,16 +3,58 @@
 <mapper namespace="com.xmu.wowoto.aftersale.mapper.AfterSaleMapper">
 
     <select id="findAllAfterSale" resultType="afterSalesService">
-        select *
+        select
+               id,
+               user_id,
+               gmt_create,
+               gmt_modified,
+               is_deleted as be_deleted,
+               goods_type,
+               apply_time,
+               apply_reason,
+               end_time,
+               type,
+               is_applied as be_deleted,
+               status as status_code,
+               number,
+               order_item_id
         from aftersales_service where is_deleted = 0 limit #{begin},#{limit}
     </select>
     <select id="findAfterSaleById" parameterType="Integer" resultType="afterSalesService">
-        select *
+        select
+            id,
+            user_id,
+            gmt_create,
+            gmt_modified,
+            is_deleted as be_deleted,
+            goods_type,
+            apply_time,
+            apply_reason,
+            end_time,
+            type,
+            is_applied as be_deleted,
+            status as status_code,
+            number,
+            order_item_id
         from aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <select id="findAfterSaleByUserId" parameterType="Integer" resultType="afterSalesService">
-        select *
+        select
+            id,
+            user_id,
+            gmt_create,
+            gmt_modified,
+            is_deleted as be_deleted,
+            goods_type,
+            apply_time,
+            apply_reason,
+            end_time,
+            type,
+            is_applied as be_deleted,
+            status as status_code,
+            number,
+            order_item_id
         from aftersales_service where user_id = #{id} and is_deleted = 0 limit #{begin},#{limit}
     </select>
 
@@ -30,13 +72,13 @@
         <trim prefix="set" suffixOverrides=",">
             <if test="userId!=null">user_id=#{userId}</if>
             <if test="true">gmt_modified=now(),</if>
-            <if test="beDeleted!=null">be_deleted=#{beDeleted},</if>
+            <if test="beDeleted!=null">is_deleted=#{beDeleted},</if>
             <if test="goodsType!=null">goods_type=#{goodsType},</if>
             <if test="applyReason!=null">apply_reason=#{applyReason},</if>
             <if test="type!=null">type=#{type},</if>
             <if test="number!=null">number=#{number},</if>
             <if test="orderItemId!=null">order_item_id=#{orderItemId},</if>
-            <if test="statusCode!=null">status_code=#{statusCode},</if>
+            <if test="statusCode!=null">status=#{statusCode},</if>
         </trim>
         WHERE id=#{id}
     </update>
