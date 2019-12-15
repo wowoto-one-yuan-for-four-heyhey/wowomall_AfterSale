@@ -18,7 +18,7 @@
                status as status_code,
                number,
                order_item_id
-        from aftersales_service where is_deleted = 0 limit #{begin},#{limit}
+        from oomall_aftersales_service where is_deleted = 0 limit #{begin},#{limit}
     </select>
     <select id="findAfterSaleById" parameterType="Integer" resultType="afterSalesService">
         select
@@ -36,7 +36,7 @@
             status as status_code,
             number,
             order_item_id
-        from aftersales_service where id = #{id} and is_deleted = 0
+        from oomall_aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <select id="findAfterSaleByUserId" parameterType="Integer" resultType="afterSalesService">
@@ -55,20 +55,20 @@
             status as status_code,
             number,
             order_item_id
-        from aftersales_service where user_id = #{id} and is_deleted = 0 limit #{begin},#{limit}
+        from oomall_aftersales_service where user_id = #{id} and is_deleted = 0 limit #{begin},#{limit}
     </select>
 
     <select id="getUserIdById" parameterType="Integer" resultType="Integer">
         select user_id
-        from aftersales_service where id = #{id} and is_deleted = 0
+        from oomall_aftersales_service where id = #{id} and is_deleted = 0
     </select>
 
     <insert id="addAfterSale" parameterType="afterSalesService" useGeneratedKeys="true" keyProperty="id">
-        insert into aftersales_service(gmt_create, gmt_modified, user_id,goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,is_deleted,is_applied,status)
+        insert into oomall_aftersales_service(gmt_create, gmt_modified, user_id,goods_type, apply_time, apply_reason, end_time, type, number, order_item_id,is_deleted,is_applied,status)
         values (now(),now(),#{userId},#{goodsType},now(),#{applyReason},#{endTime},#{type},#{number},#{orderItemId},0,0,0)  </insert>
 
     <update id="updateAfterSale" parameterType="afterSalesService">
-        update aftersales_service
+        update oomall_aftersales_service
         <trim prefix="set" suffixOverrides=",">
             <if test="userId!=null">user_id=#{userId}</if>
             <if test="true">gmt_modified=now(),</if>
@@ -83,6 +83,6 @@
         WHERE id=#{id}
     </update>
     <update id="applyAfterSale" parameterType="Integer">
-        update aftersales_service set is_applied=1,end_time =now(),gmt_modified=now() where id=#{id}
+        update oomall_aftersales_service set is_applied=1,end_time =now(),gmt_modified=now() where id=#{id}
     </update>
 </mapper>
