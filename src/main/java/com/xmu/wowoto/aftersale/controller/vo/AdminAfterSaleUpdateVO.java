@@ -6,20 +6,14 @@ package com.xmu.wowoto.aftersale.controller.vo;
  */
 public class AdminAfterSaleUpdateVO {
 
-    private String beApplied;
-
     private Integer status;
+
 
     @Override
     public String toString() {
         return "AdminAfterSaleUpdateVO{" +
-                "beApplied='" + beApplied + '\'' +
-                ", status=" + status +
+                "status=" + status +
                 '}';
-    }
-
-    public String getBeApplied() {
-        return beApplied;
     }
 
     public Integer getStatus() {

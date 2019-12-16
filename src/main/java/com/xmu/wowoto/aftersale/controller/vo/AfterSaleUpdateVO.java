@@ -11,17 +11,14 @@ public class AfterSaleUpdateVO {
 
     private String applyReason;
 
-    private Integer statusCode;
 
     @Override
     public String toString() {
         return "AfterSaleUpdateVO{" +
                 "type=" + type +
                 ", applyReason='" + applyReason + '\'' +
-                ", statusCode=" + statusCode +
                 '}';
     }
-
 
     public Integer getType() {
         return type;
@@ -31,7 +28,4 @@ public class AfterSaleUpdateVO {
         return applyReason;
     }
 
-    public Integer getStatusCode() {
-        return statusCode;
-    }
 }
