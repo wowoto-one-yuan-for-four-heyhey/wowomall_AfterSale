@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @date 2019/12/13 19:26
  */
 @Service
-@FeignClient("Order")
+@FeignClient("orderService")
 public interface OrderService {
     
 /**
