@@ -1,6 +1,7 @@
 package com.xmu.wowoto.aftersale.controller;
 
 import com.xmu.wowoto.aftersale.domain.AftersalesService;
+import com.xmu.wowoto.aftersale.domain.Log;
 import com.xmu.wowoto.aftersale.service.OrderService;
 import com.xmu.wowoto.aftersale.service.impl.AfterSaleServiceImpl;
 import com.xmu.wowoto.aftersale.util.JacksonUtil;
@@ -46,6 +47,11 @@ public class AfterSaleController {
         {
              assList = afterSaleService.findAllAfterSale(begin, limit);
         }
+        Log log=new Log();
+        log.setType(0);
+        log.setStatusCode(1);
+        log.setActionId(1);
+        log.setActions("管理员查看售后列表");
         return ResponseUtil.ok(assList);
     }
 
@@ -54,6 +60,11 @@ public class AfterSaleController {
         if(id==null || id < 1)
         {    return ResponseUtil.fail(402,"参数值不对");}
         AftersalesService ass=afterSaleService.getAfterSale(id);
+        Log log=new Log();
+        log.setType(0);
+        log.setStatusCode(1);
+        log.setActionId(1);
+        log.setActions("管理员查看售后服务"+ass.getId());
         return ResponseUtil.ok(ass);
     }
 
@@ -76,6 +87,11 @@ public class AfterSaleController {
         AftersalesService retass=afterSaleService.updateUser(id,ass);
         if(retass!=null)
         {
+            Log log=new Log();
+            log.setType(2);
+            log.setStatusCode(1);
+            log.setActionId(1);
+            log.setActions("管理员修改售后服务"+retass.getId());
             return ResponseUtil.ok(retass);
         }
         else
