@@ -6,6 +6,7 @@ import com.xmu.wowoto.aftersale.service.AfterSaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,6 +21,8 @@ public class AfterSaleServiceImpl implements AfterSaleService {
 
     @Override
     public AftersalesService addAfterSale(AftersalesService ass) {
+        ass.setGmtModified(LocalDateTime.now());
+        ass.setGmtCreate(LocalDateTime.now());
         Integer ret=afterSaleDao.addAfterSale(ass);
         if(ret!=0)
         { Integer id= ass.getId();
@@ -47,6 +50,7 @@ public class AfterSaleServiceImpl implements AfterSaleService {
     }
     @Override
     public AftersalesService updateUser(Integer id,AftersalesService ass){
+        ass.setGmtModified(LocalDateTime.now());
         afterSaleDao.updateAfterSale(ass);
         return afterSaleDao.getAfterSale(id);
     }
