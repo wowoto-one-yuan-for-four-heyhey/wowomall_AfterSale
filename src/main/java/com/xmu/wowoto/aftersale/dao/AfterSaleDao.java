@@ -24,6 +24,7 @@ public class AfterSaleDao {
         if(as != null){
             as.setBeDeleted(false);
         }
+
         return as;
     }
     public Integer getUserIdById(Integer id){return afterSaleMapper.getUserIdById(id);}
