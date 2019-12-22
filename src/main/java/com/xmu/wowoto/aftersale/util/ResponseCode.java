@@ -1,15 +1,14 @@
 package com.xmu.wowoto.aftersale.util;
 
 /**
- *
  * @author wowoto
  * @date 12/11/2019
  */
-
-/**
- * GET_FAILED 55
- */
 public enum ResponseCode {
+
+    /**
+     * GET_FAILED 55
+     */
     GET_FAILED(691,"获取售后服务失败"),
     REQUEST_COUPON(692,"申请售后服务失败"),
     USE_FAILED(693 ,"修改售后服务失败"),
