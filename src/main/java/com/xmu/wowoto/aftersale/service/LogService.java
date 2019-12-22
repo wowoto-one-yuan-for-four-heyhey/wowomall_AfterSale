@@ -11,5 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Service
 public interface LogService {
+
+    /**
+     * 添加日志
+     * @param log
+     * @return
+     */
     Log addLog(@RequestBody Log log);
 }
